@@ -83,7 +83,7 @@ export default {
             body: { stringValue: body },
             region: { stringValue: region },
             authorId: { stringValue: claims.sub },
-            companyId: { stringValue: String(claims.organization ?? "") },
+            organization: { stringValue: String(claims.organization ?? "") },
             createdAt: { timestampValue: new Date().toISOString() },
           },
         }),
