@@ -165,3 +165,9 @@ dist
 .env*
 !.env.example
 .wrangler/
+
+# Scripts de prueba
+**/node_modules/
+scripts/sa.json
+scripts/.urgent-config.json
+scripts/.urgent-token.json
