@@ -20,7 +20,7 @@
 
 ## Enviar alerta
 1. Abrir la terminal en la carpeta /scripts
-2. Ejecutar ‘node enviar-alerta.js‘
+2. Ejecutar `node enviar-alerta.js`
 3. Pegar los datos que te pida (la primera vez).
 4. Seleccionar una latitud, longitud, radio y tipo.
 5. Escribir "S" y apretar enter
