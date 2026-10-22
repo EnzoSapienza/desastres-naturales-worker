@@ -22,6 +22,7 @@ export async function urgentPost(req, env) {
     if (!data) return json({ error: "invalid input" }, 400);
 
     const topics = cellsForCircle(data.latitud, data.longitud, data.radio);
+    console.log("topics:", topics.join(","));
     if (topics.length > MAX_CELLS) return json({ error: "area too large" }, 400);
 
     // Credenciales de Google

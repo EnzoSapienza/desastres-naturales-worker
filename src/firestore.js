@@ -9,7 +9,7 @@ export async function saveAlert(env, headers, { latitud, longitud, radio, tipo }
                 fields: {
                     latitud: { doubleValue: latitud },
                     longitud: { doubleValue: longitud },
-                    radio: { doubleValue: radio },
+                    radio: { integerValue: radio * 1000},
                     tipo: { stringValue: tipo },
                     createdAt: { timestampValue: new Date().toISOString() },
                 },

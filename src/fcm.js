@@ -41,7 +41,8 @@ export async function sendPush(env, headers, topics, { postId, latitud, longitud
                 }),
             }
         );
-        if (!res.ok) console.log("fcm failed:", res.status, await res.text());
+        const textoFcm = await res.text();
+        console.log("fcm", res.status, textoFcm);
         return res.ok;
     }));
 
