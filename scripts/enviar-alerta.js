@@ -98,10 +98,12 @@ try {
   do {
     console.log("\n--- Nueva alerta ---");
     const datos = {
+      tipo: await preguntarTexto("Tipo (ej. inundacion): ", 40),
+      nombre: await preguntarTexto("Nombre (ej. Desborde del río Uruguay): ", 100),
+      descripcion: await preguntarTexto("Descripción (ej. Evacuar la zona): ", 200),
       latitud: await preguntarNumero("Latitud  (ej. -34.72): ", { min: -85, max: 85 }),
       longitud: await preguntarNumero("Longitud (ej. -58.26): ", { min: -180, max: 180 }),
       radio: await preguntarNumero("Radio en km (máx. 100): ", { min: 0.1, max: 100 }),
-      tipo: await preguntarTexto("Tipo (ej. inundacion): ", 40),
     };
 
     console.log("\nSe enviará:", JSON.stringify(datos));

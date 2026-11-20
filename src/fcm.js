@@ -7,9 +7,7 @@ function chunk(arr, size) {
 }
 
 // Envía el push a todos los topics. Devuelve { failed, total }.
-export async function sendPush(env, headers, topics, { postId, latitud, longitud, radio, tipo }) {
-    const title = `Alerta: ${tipo}`;
-    const body = `Alerta en tu zona (radio ${radio} km)`;
+export async function sendPush(env, headers, topics, { postId, latitud, longitud, radio, tipo, nombre, descripcion }) {
     const chunks = chunk(topics, TOPICS_PER_CONDITION);
 
     const results = await Promise.all(chunks.map(async (c) => {
@@ -21,13 +19,15 @@ export async function sendPush(env, headers, topics, { postId, latitud, longitud
                 body: JSON.stringify({
                     message: {
                         condition: c.map((t) => `'${t}' in topics`).join(" || "),
-                        notification: { title, body },
+                        notification: { title: nombre, body: descripcion },
                         data: {
                             postId,
                             tipo,
                             latitud: String(latitud),
                             longitud: String(longitud),
                             radio: String(radio),
+                            nombre: String(nombre),
+                            descripcion: String(descripcion),
                         },
                         android: {
                             priority: "HIGH",
@@ -36,6 +36,9 @@ export async function sendPush(env, headers, topics, { postId, latitud, longitud
                         apns: {
                             headers: { "apns-priority": "10" },
                             payload: { aps: { sound: "default", "interruption-level": "time-sensitive" } },
+                        },
+                        webpush: {
+                            headers: { Urgency: "high" },
                         },
                     },
                 }),

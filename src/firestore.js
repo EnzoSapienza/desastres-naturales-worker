@@ -1,5 +1,5 @@
 // Guarda la alerta y devuelve su id. Lanza error si falla.
-export async function saveAlert(env, headers, { latitud, longitud, radio, tipo }) {
+export async function saveAlert(env, headers, { latitud, longitud, radio, tipo, nombre, descripcion }) {
     const res = await fetch(
         `https://firestore.googleapis.com/v1/projects/${env.PROJECT_ID}/databases/(default)/documents/alertas`,
         {
@@ -9,9 +9,11 @@ export async function saveAlert(env, headers, { latitud, longitud, radio, tipo }
                 fields: {
                     latitud: { doubleValue: latitud },
                     longitud: { doubleValue: longitud },
-                    radio: { integerValue: radio * 1000},
+                    radio: { integerValue: radio * 1000 },
                     tipo: { stringValue: tipo },
-                    createdAt: { timestampValue: new Date().toISOString() },
+                    nombre: { stringValue: nombre },
+                    descripcion: { stringValue: descripcion },
+                    fechaInicio: { timestampValue: new Date().toISOString() },
                 },
             }),
         }
